@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blooming Memories 💙</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&family=Poppins:wght@300;400;500;600&family=Dancing+Script:wght@500;600;700&family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="ambient"></div>
+<div id="cakeDim"></div>
+
+<div id="topnav">
+  <div id="progress"></div>
+  <div id="navbtns">
+    <button class="navbtn" id="musicToggle" title="Toggle music">🔈</button>
+    <button class="navbtn" id="homeBtn" title="Home">⌂</button>
+    <button class="navbtn" id="prevBtn" title="Previous">‹</button>
+    <button class="navbtn" id="nextBtn" title="Next">›</button>
+  </div>
+</div>
+
+<div id="app">
+
+  <!-- PAGE 1 — WELCOME -->
+  <section class="page active" id="page-welcome">
+    <div class="glass-card">
+      <div class="eyebrow">a little something for</div>
+      <div id="typewriter"></div>
+      <div id="recipientName"></div>
+      <p class="quote" style="font-size:20px;">Step gently — a garden of memories is blooming just for you.</p>
+      <button class="glow-btn" onclick="goTo(1)">Begin the Journey 🌸</button>
+    </div>
+  </section>
+
+  <!-- PAGE 2 — CAKE -->
+  <section class="page" id="page-cake">
+    <div class="glass-card">
+      <div class="eyebrow">make a wish</div>
+      <h1 style="font-size:clamp(22px,4vw,30px);">Blow out the candles</h1>
+      <div class="cake-wrap" id="cakeWrap">
+        <div class="candle" style="left:38%;"><div class="flame" id="flame1"></div></div>
+        <div class="candle" style="left:50%;"><div class="flame" id="flame2"></div></div>
+        <div class="candle" style="left:62%;"><div class="flame" id="flame3"></div></div>
+        <div class="layer layer3"></div>
+        <div class="layer layer2"></div>
+        <div class="layer layer1"></div>
+        <div class="plate"></div>
+      </div>
+      <button class="glow-btn" id="blowBtn" onclick="blowCandles()">Blow Out the Candles 💨</button>
+      <div id="cakeMsg" class="quote" style="font-size:19px;display:none;">
+        “May every wish you make today find its way to reality.”
+        <div><button class="ghost-btn" onclick="goTo(2)">Continue →</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 4 — LETTER -->
+  <section class="page" id="page-letter">
+    <div class="eyebrow">a letter for you</div>
+    <h1 style="font-size:clamp(22px,4vw,30px);margin-bottom:4px;">Open the Envelope</h1>
+    <div class="envelope" id="envelope" onclick="openEnvelope()">
+      <div class="env-flap"></div>
+      <div class="env-body"></div>
+      <div class="env-seal">💙</div>
+    </div>
+    <div class="letter-paper" id="letterPaper">
+      <p id="letterText"></p>
+      <div class="letter-sign" id="letterSign"></div>
+    </div>
+    <button class="ghost-btn" onclick="goTo(3)" style="margin-top:24px;">Continue to Our Memories →</button>
+  </section>
+
+  <!-- PAGE 5 — GALLERY -->
+  <section class="page" id="page-gallery">
+    <div class="eyebrow">the scrapbook</div>
+    <h1 style="font-size:clamp(24px,4vw,32px);margin-bottom:18px;">Memory Gallery</h1>
+    <div class="gallery-grid" id="galleryGrid"></div>
+    <button class="ghost-btn" onclick="goTo(4)" style="margin-top:30px;">Continue to Your Gift →</button>
+  </section>
+
+  <!-- PAGE 6 — GIFT BOX -->
+  <section class="page" id="page-gift">
+    <div class="glass-card">
+      <div class="eyebrow">one more surprise</div>
+      <h1 style="font-size:clamp(22px,4vw,30px);">Open Your Gift</h1>
+      <div class="gift-wrap" id="giftWrap" onclick="openGift()">
+        <div class="bow">🎀</div>
+        <div class="gift-lid"></div>
+        <div class="ribbon-v"></div>
+        <div class="ribbon-h"></div>
+        <div class="gift-box"></div>
+      </div>
+      <div id="giftMsg" class="quote" style="font-size:19px;">
+        A little digital coupon: <strong>“One free hug, redeemable anytime.”</strong> 💌
+        <div><button class="glow-btn" onclick="goTo(5)">See the Finale ✨</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 7 — FINALE -->
+  <section class="page" id="page-finale">
+    <canvas id="fireworksCanvas"></canvas>
+    <div class="eyebrow" style="color:#fff;opacity:.85;">grand finale</div>
+    <h1 style="font-size:clamp(30px,6vw,48px);margin-bottom:18px;">Happy Birthday 🎉</h1>
+    <p class="finale-msg quote" id="finalMessage"></p>
+    <div class="finale-btns">
+      <button class="glow-btn" onclick="replayJourney()">Replay the Journey</button>
+      <button class="ghost-btn" style="border-color:#fff;color:#fff;" onclick="goTo(3)">Visit the Gallery Again</button>
+    </div>
+  </section>
+
+</div>
+
+<div id="lightbox">
+  <div class="lb-card">
+    <div class="lb-thumb" id="lbThumb"></div>
+    <div class="lb-body">
+      <button class="lb-close" onclick="closeLightbox()">✕</button>
+      <h3 id="lbTitle" style="font-size:19px;"></h3>
+      <div class="eyebrow" id="lbDate"></div>
+      <p id="lbCaption" style="font-size:14px;line-height:1.6;margin-top:10px;"></p>
+    </div>
+  </div>
+</div>
+
+<footer class="credit">made with 💙 — Blooming Memories</footer>
+
+<script src="data/config.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
